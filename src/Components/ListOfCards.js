@@ -1,48 +1,45 @@
-import CardComponent from "./CardComponent";
 import React, {Component} from "react";
+let ReactCSSTransitionGroup = require('react-transition-group');
 
 class ListOfCards extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            cardsList: [
-                {
-                    id: 123,
-                    name: "resume1"
-                },
-                {
-                    id: 234,
-                    name: "resume2"
-                },
-                {
-                    id: 345,
-                    name: "resume3"
-                },
-                {
-                    id: 456,
-                    name: "resume4"
-                },
-            ]
-        }
+        this.state = {items: ['hello', 'world', 'click', 'me']};
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
 
-    render() {
-        return (
-            <div className={"container"}>
-                <h1>List of Cards:</h1>
-                <div className={"row"}>
-                    {
-                        this.state.cardsList.map((card, index) => (
-                            <CardComponent
-                                key={card.index}
-                                name={card.name}> </CardComponent>
-                        ))
-                    }
-                </div>
+    handleAdd() {
+        const newItems = this.state.items.concat([
+            prompt('Enter some text')
+        ]);
+        this.setState({items: newItems});
+    }
 
+    handleRemove(i) {
+        let newItems = this.state.items.slice();
+        newItems.splice(i, 1);
+        this.setState({items: newItems});
+    }
+
+    render() {
+        const items = this.state.items.map((item, i) => (
+            <div key={i} onClick={() => this.handleRemove(i)}>
+                {item}
             </div>
-        )
+        ));
+
+        return (
+            <div>
+                <button onClick={this.handleAdd}>Add Item</button>
+                <ReactCSSTransitionGroup
+                    transitionName="example"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+                    {items}
+                </ReactCSSTransitionGroup>
+            </div>
+        );
     }
 }
 export default ListOfCards
