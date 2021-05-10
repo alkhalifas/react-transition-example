@@ -1,11 +1,11 @@
 import logo from './logo.svg';
-import './App.css';
-import ListOfCards from "./Components/ListOfCards";
+// import './App.css';
+import {TodoList} from "./Components/TodoList";
 
 function App() {
   return (
-    <div className="App">
-      <ListOfCards></ListOfCards>
+    <div className="App container">
+      <TodoList></TodoList>
 
     </div>
   );
