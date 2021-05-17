@@ -21,6 +21,7 @@ export function TodoList() {
         { id: uuid(), text: 'Invite friends over' },
         { id: uuid(), text: 'Fix the TV' },
     ]);
+    
     return (
         <div className={"container-fluid"} >
             <h1>React Transition for Adding Items to List</h1>
